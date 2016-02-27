@@ -1,15 +1,16 @@
+# @author Artur Sak (sak2)
+
 import sys
 import pygame
 import random
 import math
-
 from Hopfield import *
 
 class Graphics(object):
     def __init__(self, size=(500,500), caption="Hopfield Network"):
         self.size = size
         self.caption = caption
-        self.node_radius = 10
+        self.node_radius = 15
         self.node_color = (255,0,0)
         self.line_color = (255,255,255)
         self.screen_color = (0,0,0)
@@ -85,7 +86,6 @@ class Graphics(object):
                 nodes = grapher.adjust_positions(nodes)
                 self.draw_graph(nodes)
                 self.render_screen()
-
             if is_frozen == False:
                 self.draw_graph(nodes)
                 self.render_screen()
@@ -93,8 +93,6 @@ class Graphics(object):
 
 size = (1000,700)
 net = Hopfield(16,size)
-for node in net.nodes:
-    print len(node.incoming)
 screen = Graphics(size=size)
 screen.draw_graph(net.nodes)
 screen.mainloop(net.nodes)

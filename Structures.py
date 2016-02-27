@@ -1,4 +1,5 @@
 # @author Artur Sak (sak2)
+
 import math
 import random
 import pygame
@@ -15,7 +16,11 @@ class Unit(object):
     def __init__(self, input = 0.0, activation = 0.0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
-
+        if incoming is None:
+            self.incoming = []
+        else:
+            self.incoming = incoming
+        # Node positions for PyGame Visuals
         self._position = (0,0)
         self.x_range = x_range
         self.y_range = y_range
@@ -25,12 +30,7 @@ class Unit(object):
             self.position = (random.randint(xmin, xmax), random.randint(ymin,ymax))
         else:
             self.position = position
-
-        if incoming is None:
-            self.incoming = []
-        else:
-            self.incoming = incoming
-
+        # Physical attributes added for visualization
         self.charge = 1
         self.velocity = (0,0)
         self.mass = mass

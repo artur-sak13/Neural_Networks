@@ -1,4 +1,5 @@
-# @author Artur Sak
+# @author Artur Sak (sak2)
+
 import random
 from Activations import *
 
@@ -7,7 +8,6 @@ class Hopfield(Network):
         self.numNodes = numNodes
         self.threshold = 0.0
         self.screen_size = screen_size
-
         self.walsh = [[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,
                        0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
                       [1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,
@@ -28,5 +28,5 @@ class Hopfield(Network):
         elif node.activation < self.threshold:
             node.activation = 1.0
 
-    def run_network(self, iterations):
+    def run(self, iterations):
         pass

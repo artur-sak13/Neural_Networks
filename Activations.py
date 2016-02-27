@@ -1,4 +1,5 @@
 # @author Artur Sak (sak2)
+
 from Structures import *
 
 def add_t(*tuples):
@@ -17,16 +18,13 @@ class Network(object):
         self.attraction = 2
         self.timestep = 0.15
         self.damping = 0.5
-        self.min_spring_distance = 100
+        self.min_spring_distance = 350
         # Create n number of Unit objects in node list
         self.nodes = [Unit(x_range=(0,xmax), y_range=(0,ymax)) for i in range(numNodes)]
-        # Add connections to each node's "incoming" adjacency list
-        for i in range(self.numNodes):
-            for j in range(self.numNodes):
-                if j != i:
-                    self.nodes[i].add_neighbor(Connection(recipient=self.nodes[i],
-                                                  sender=self.nodes[j],
-                                                  weight=1.0))
+        for node in self.nodes:
+            for other in self.nodes:
+                if node != other:
+                    node.add_neighbor(Connection(recipient=node, sender = other, weight = 1.0))
 
     def adjust_positions(self, nodes_list):
         for node in nodes_list:
