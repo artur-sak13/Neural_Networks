@@ -12,7 +12,7 @@ class Connection(object):
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, input = 0.0, activation = 0.0, incoming = None, neighbors = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+    def __init__(self, input = 0.0, activation = 0.0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
 
@@ -30,10 +30,6 @@ class Unit(object):
             self.incoming = []
         else:
             self.incoming = incoming
-        if neighbors is None:
-            self.neighbors = []
-        else:
-            self.neighbors = neighbors
 
         self.charge = 1
         self.velocity = (0,0)

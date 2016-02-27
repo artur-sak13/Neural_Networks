@@ -21,20 +21,12 @@ class Network(object):
         # Create n number of Unit objects in node list
         self.nodes = [Unit(x_range=(0,xmax), y_range=(0,ymax)) for i in range(numNodes)]
         # Add connections to each node's "incoming" adjacency list
-        for i in range(len(self.nodes)):
-            self.nodes[i].add_neighbor(Connection(recipient=self.nodes[i],
-                                                  sender=self.nodes[(i+1)%numNodes],
+        for i in range(self.numNodes):
+            for j in range(self.numNodes):
+                if j != i:
+                    self.nodes[i].add_neighbor(Connection(recipient=self.nodes[i],
+                                                  sender=self.nodes[j],
                                                   weight=1.0))
-            self.nodes[i].add_neighbor(Connection(recipient=self.nodes[i],
-                                                  sender=self.nodes[(i+2)%numNodes],
-                                                  weight=1.0))
-
-    def generate_graph(self):
-        for i in range(len(self.nodes)):
-            for j in range(len(self.nodes)):
-                if i != j:
-                    self.nodes[i].neighbors.append(self.nodes[j])
-        return self.nodes
 
     def adjust_positions(self, nodes_list):
         for node in nodes_list:
@@ -48,9 +40,9 @@ class Network(object):
                     cx, cy = self.coulomb_repulsion(node, other)
                     net_force = (nx + cx, ny + cy)
 
-            for other in node.neighbors:
+            for connection in node.incoming:
                 nx, ny = net_force
-                hx, hy = self.hooke_attraction(node, other)
+                hx, hy = self.hooke_attraction(node, connection.sender)
                 net_force = (nx + hx, ny + hy)
 
             temp = mul_t_constant(net_force, self.timestep)

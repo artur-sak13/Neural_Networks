@@ -25,12 +25,12 @@ class Graphics(object):
 
     def draw_lines(self, nodes):
         for node in nodes:
-            for neighbor in node.neighbors:
+            for connection in node.incoming:
                 pygame.draw.aaline(
                     self.screen,
                     self.line_color,
                     node.position,
-                    neighbor.position,
+                    connection.sender.position,
                     1)
 
     def draw_nodes(self, nodes):
@@ -82,7 +82,7 @@ class Graphics(object):
                     selected_node.static = False
                     selected_node = None
             if not move:
-                nodes = grapher.adjust_positions(grapher.nodes)
+                nodes = grapher.adjust_positions(nodes)
                 self.draw_graph(nodes)
                 self.render_screen()
 
@@ -93,9 +93,8 @@ class Graphics(object):
 
 size = (1000,700)
 net = Hopfield(16,size)
-nodes = net.generate_graph()
-for node in nodes:
-    print len(node.neighbors)
+for node in net.nodes:
+    print len(node.incoming)
 screen = Graphics(size=size)
-screen.draw_graph(nodes)
-screen.mainloop(nodes)
+screen.draw_graph(net.nodes)
+screen.mainloop(net.nodes)
