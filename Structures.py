@@ -11,11 +11,19 @@ class Connection(object):
         self.sender = sender
         self.weight = weight
 
+    # Implements Hopfield Learning Algorithm
+    def learn(self):
+        if self.sender.activation == self.recipient.activation:
+            self.weight += 1
+        else:
+            self.weight -= 1
+
 class Unit(object):
     # Default unit constructor with optional parameters
     def __init__(self, input = 0.0, activation = 0.0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
+        self.threshold = 0.0
         if incoming is None:
             self.incoming = []
         else:
@@ -24,6 +32,7 @@ class Unit(object):
         self._position = (0,0)
         self.x_range = x_range
         self.y_range = y_range
+
         if not position:
             xmin, xmax = x_range
             ymin, ymax = y_range
@@ -70,8 +79,12 @@ class Unit(object):
             self.input += connection.weight * connection.sender.activation
 
     # Function updates a node's activation value based on changed net input value
-    def update_activation(self, temperature=1.0):
-        pass
+    def update_activation(self):
+        if self.input > self.threshold:
+            self.activation = 1.0
+        else:
+            self.activation = 0.0
+
 
     # Logistic activation function
     def logistic_activation(self, temperature=0.0):
@@ -103,13 +116,6 @@ class Unit(object):
             else:
                 delta_act = (gamma*(1.0 - self.activation)*self.input) - (delta * self.activation)
         self.activation += delta_act
-
-    # Implements Hopfield Learning Algorithm
-    def hopfield_learning(self):
-        if self.sender.activation == self.recipient.activation:
-            self.weight += 1
-        else:
-            self.weight -= 1
 
     # Creates connection
     def add_neighbor(self, connection):
