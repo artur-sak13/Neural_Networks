@@ -94,7 +94,6 @@ class Network(object):
     def update_all_activations(self, i = None):
         for node in self.nodes:
             node.update_activation()
-            # node.temporal_integrator(0.5, 0.1, inhibit = i )
 
     # Calculate the inputs for all of the nodes in the network
     def set_inputs(self, const=None):

@@ -86,10 +86,3 @@ class Graphics(object):
             if is_frozen == False:
                 self.draw_graph(nodes)
                 self.render_screen()
-
-
-size = (1000,700)
-net = Hopfield(16,size)
-screen = Graphics(size=size)
-screen.draw_graph(net.nodes)
-screen.mainloop(net.nodes)

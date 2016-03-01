@@ -13,7 +13,7 @@ class Connection(object):
 
     # Implements Hopfield Learning Algorithm
     def learn(self):
-        if self.sender.activation == self.recipient.activation:
+        if self.recipient.activation == self.sender.activation:
             self.weight += 1
         else:
             self.weight -= 1
@@ -44,7 +44,6 @@ class Unit(object):
         self.velocity = (0,0)
         self.mass = mass
         self.static = False
-
 
     def _get_position(self):
         return self._position
