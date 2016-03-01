@@ -1,9 +1,6 @@
 # @author Artur Sak (sak2)
 
 import sys
-import pygame
-import random
-import math
 from Hopfield import *
 
 class Graphics(object):

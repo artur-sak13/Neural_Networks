@@ -85,7 +85,6 @@ class Unit(object):
         else:
             self.activation = 0.0
 
-
     # Logistic activation function
     def logistic_activation(self, temperature=0.0):
             self.activation = 1 / (1 + math.e**(-self.input/temperature))
