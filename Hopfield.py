@@ -32,10 +32,11 @@ class Hopfield(Network):
 
         for pattern in self.walsh:
             self.set_activations(pattern)
-
-        for node in self.nodes:
-            for conn in node.incoming:
-                conn.learn()
+            for node in self.nodes:
+                for conn in node.incoming:
+                    conn.learn()
+        # self.calc_energy()
+        # print "Energy" + str(self.energy)
 
     def test(self):
         for pattern in self.walsh:
@@ -43,21 +44,17 @@ class Hopfield(Network):
             for distortion in self.distortions:
                 print "Distortion: " + str(distortion)
                 for i in range(3):
-                    for i in range(len(pattern_d)):
+                    for j in range(len(pattern_d)):
                         if random.random() < distortion:
-                            pattern_d[i] = toggle(pattern_d[i])
+                            pattern_d[j] = toggle(pattern_d[j])
                     self.run(pattern_d, pattern)
             print "____________________END OF PATTERN______________________" + "\n"
 
     def hamming_dist(self, pattern, orig):
-        # print "Distorted Pattern: " + str(pattern)
-        # print "Walsh function: " + str(orig)
         dist = 0
         for i in range(len(self.nodes)):
             if pattern[i] != orig[i]:
                 dist += 1
-        # print "Hamming Distance: " + str(dist)
-        # print "\n"
         return dist
 
     def calc_energy(self):
@@ -67,23 +64,28 @@ class Hopfield(Network):
                 self.energy += connection.weight * (node.activation * connection.sender.activation)
         self.energy *= -0.5
 
-    def changed(self):
-        pre_energy = self.energy
-        self.calc_energy()
-        if pre_energy != self.energy:
-            return True
-        else:
-            return False
+    def changed(self, orig):
+        for i in range(len(self.nodes)):
+            if orig[i] != self.nodes[i].activation:
+                return True
+            else:
+                return False
 
     def run(self, pattern_d, orig):
         all_done = False
         iterations_settled = 0
         self.set_activations(pattern_d)
-        self.set_inputs()
+        settled = []
 
         while not all_done:
-            self.update_all_activations()
-            if self.changed():
+            del settled[:]
+            for node in self.nodes:
+                settled.append(node.activation)
+            self.set_inputs()
+            node = self.nodes[random.randint(0,len(self.nodes) - 1)]
+            node.update_activation()
+
+            if self.changed(settled):
                 iterations_settled = 0
             else:
                 iterations_settled += 1
@@ -91,22 +93,19 @@ class Hopfield(Network):
                 all_done = True
         print "Walsh Function: " + str(orig)
         print "Distorted: " +  str(pattern_d)
-        settled = []
-        for node in self.nodes:
-            settled.append(node.activation)
         print "Settled: " + str(settled)
         print "Hamming Distance: " + str(self.hamming_dist(settled, orig))
+        self.calc_energy()
         print "Energy: " + str(self.energy)
-        # self.hamming_dist(pattern_d, orig)
         print "\n"
 
-def main():
-    size = (1000,700)
-    net = Hopfield(16,size)
+# def main():
+    # size = (1000,700)
+    # net = Hopfield(16,size)
     # screen = Graphics(size=size)
     # screen.draw_graph(net.nodes)
     # screen.mainloop(net.nodes)
-    net.train_network()
-    net.test()
+    # net.train_network()
+    # net.test()
 
-main()
+# main()

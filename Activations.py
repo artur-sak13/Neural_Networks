@@ -89,6 +89,17 @@ class Network(object):
     def set_activations(self, activations):
         for node in self.nodes:
             node.activation = activations[self.nodes.index(node)]
+        self.set_colors()
+        return self.nodes
+
+    def set_colors(self):
+        for node in self.nodes:
+            if node.activation == 1:
+                node.node_color = (0,255,0)
+                # print "Set to Green"
+            else:
+                node.node_color = (255,0,0)
+                # print "Set to Orange"
 
     # Update all of the activations in the network
     def update_all_activations(self, i = None):

@@ -2,19 +2,23 @@
 
 import sys
 from Hopfield import *
+# import Hopfield
 
 class Graphics(object):
     def __init__(self, size=(500,500), caption="Hopfield Network"):
         self.size = size
         self.caption = caption
         self.node_radius = 15
-        self.node_color = (255,0,0)
         self.line_color = (255,255,255)
         self.screen_color = (0,0,0)
 
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         pygame.display.set_caption(self.caption)
+
+    def change_node_color(self):
+        pass
+
 
     def draw_graph(self, nodes):
         self.screen.fill(self.screen_color)
@@ -36,7 +40,7 @@ class Graphics(object):
             intpos = (int(node.position[0]), int(node.position[1]))
             pygame.draw.circle(
                 self.screen,
-                self.node_color,
+                node.node_color,
                 intpos,
                 self.node_radius,
                 0)
@@ -52,9 +56,13 @@ class Graphics(object):
         selected_node = None
 
         grapher = Hopfield(16, self.size)
+        nodes = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
+        nodes  = grapher.set_activations(nodes)
         font = pygame.font.Font(None, 20)
 
         while is_running:
+            self.draw_graph(nodes)
+            self.render_screen()
             event = pygame.event.poll()
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -86,3 +94,11 @@ class Graphics(object):
             if is_frozen == False:
                 self.draw_graph(nodes)
                 self.render_screen()
+
+size = (1000,700)
+net = Hopfield(16,size)
+screen = Graphics(size=size)
+screen.draw_graph(net.nodes)
+screen.mainloop(net.nodes)
+# net.train_network()
+    # net.test()

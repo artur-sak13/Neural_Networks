@@ -24,6 +24,7 @@ class Unit(object):
         self.input = input
         self.activation = activation
         self.threshold = 0.0
+        self.node_color = (255,100,0)
         if incoming is None:
             self.incoming = []
         else:
@@ -81,8 +82,11 @@ class Unit(object):
     def update_activation(self):
         if self.input > self.threshold:
             self.activation = 1
+            self.node_color = (0,255,0)
+
         else:
             self.activation = 0
+            self.node_color = (255,100,0)
 
     # Logistic activation function
     def logistic_activation(self, temperature=0.0):
