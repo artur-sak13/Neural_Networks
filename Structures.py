@@ -14,13 +14,13 @@ class Connection(object):
     # Implements Hopfield Learning Algorithm
     def learn(self):
         if self.recipient.activation == self.sender.activation:
-            self.weight += 1
+            self.weight += 1.0
         else:
-            self.weight -= 1
+            self.weight -= 1.0
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, input = 0.0, activation = 0.0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+    def __init__(self, input = 0.0, activation = 0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
         self.threshold = 0.0
@@ -75,14 +75,14 @@ class Unit(object):
     def update_input(self):
         self.input = 0.0
         for connection in self.incoming:
-            self.input += connection.weight * connection.sender.activation
+            self.input += connection.weight * float(connection.sender.activation)
 
     # Function updates a node's activation value based on changed net input value
     def update_activation(self):
         if self.input > self.threshold:
-            self.activation = 1.0
+            self.activation = 1
         else:
-            self.activation = 0.0
+            self.activation = 0
 
     # Logistic activation function
     def logistic_activation(self, temperature=0.0):

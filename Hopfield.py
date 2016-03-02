@@ -6,10 +6,9 @@ from Activations import *
 
 def toggle(node):
     if node == 1:
-        return 0.0
+        return 0
     else:
-        return 1.0
-
+        return 1
 
 class Hopfield(Network):
     def __init__(self, numNodes, screen_size):
@@ -19,14 +18,10 @@ class Hopfield(Network):
         self.screen_size = screen_size
         self.distortions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
 
-        self.walsh = [[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,
-                       0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
-                      [1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,
-                       1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0],
-                      [1.0,1.0,0.0,0.0,1.0,1.0,0.0,0.0,
-                       1.0,1.0,0.0,0.0,1.0,1.0,0.0,0.0],
-                       [1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,
-                        1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0]]
+        self.walsh = [[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0],
+                      [1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0],
+                      [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0],
+                      [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]]
 
         Network.__init__(self, numNodes, screen_size)
 
@@ -46,17 +41,23 @@ class Hopfield(Network):
         for pattern in self.walsh:
             pattern_d = copy.deepcopy(pattern)
             for distortion in self.distortions:
-                for activation in pattern_d:
-                    if random.random() < distortion:
-                        toggle(activation)
+                print "Distortion: " + str(distortion)
                 for i in range(3):
+                    for i in range(len(pattern_d)):
+                        if random.random() < distortion:
+                            pattern_d[i] = toggle(pattern_d[i])
                     self.run(pattern_d, pattern)
+            print "____________________END OF PATTERN______________________" + "\n"
 
-    def hamming_dist(self, pattern):
+    def hamming_dist(self, pattern, orig):
+        # print "Distorted Pattern: " + str(pattern)
+        # print "Walsh function: " + str(orig)
         dist = 0
-        for i in xrange(len(self.nodes)):
-            if self.nodes[i].activation != pattern[i]:
+        for i in range(len(self.nodes)):
+            if pattern[i] != orig[i]:
                 dist += 1
+        # print "Hamming Distance: " + str(dist)
+        # print "\n"
         return dist
 
     def calc_energy(self):
@@ -74,13 +75,13 @@ class Hopfield(Network):
         else:
             return False
 
-    def run(self, pattern_d):
+    def run(self, pattern_d, orig):
         all_done = False
         iterations_settled = 0
-        self.set_activations(pattern_d,)
+        self.set_activations(pattern_d)
+        self.set_inputs()
 
         while not all_done:
-            self.set_inputs()
             self.update_all_activations()
             if self.changed():
                 iterations_settled = 0
@@ -88,8 +89,16 @@ class Hopfield(Network):
                 iterations_settled += 1
             if iterations_settled == 30:
                 all_done = True
-
-        print self.hamming_dist(pattern_d)
+        print "Walsh Function: " + str(orig)
+        print "Distorted: " +  str(pattern_d)
+        settled = []
+        for node in self.nodes:
+            settled.append(node.activation)
+        print "Settled: " + str(settled)
+        print "Hamming Distance: " + str(self.hamming_dist(settled, orig))
+        print "Energy: " + str(self.energy)
+        # self.hamming_dist(pattern_d, orig)
+        print "\n"
 
 def main():
     size = (1000,700)

@@ -24,7 +24,7 @@ class Network(object):
         for node in self.nodes:
             for other in self.nodes:
                 if node != other:
-                    node.add_neighbor(Connection(recipient=node, sender = other, weight = 1.0))
+                    node.add_neighbor(Connection(recipient=node, sender = other))
 
     def adjust_positions(self, nodes_list):
         for node in nodes_list:
