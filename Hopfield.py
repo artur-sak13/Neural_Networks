@@ -39,17 +39,45 @@ class Hopfield(Network):
                 for conn in node.incoming:
                     conn.learn()
 
+    def random_train(self):
+        training_patterns = [[random.randint(0,1) for x in range(16)] for y in range(4)]
+        for node in self.nodes:
+            for conn in node.incoming:
+                conn.weight = 0
+
+        self.walsh = training_patterns
+        for pattern in self.walsh:
+            self.set_activations(pattern)
+            for node in self.nodes:
+                for conn in  node.incoming:
+                    conn.learn()
+
+    def relational_train(self):
+        base = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
+        pattern_d = [[toggle(x) for x in base if random.random() < 0.125] for y in range(6)]
+
+        for node in self.nodes:
+            for conn in node.incoming:
+                conn.weight = 0
+
+        for pattern in training_patterns:
+            self.set_activations(pattern)
+            for node in self.nodes:
+                for conn in  node.incoming:
+                    conn.learn()
+
+
     # Tests if network returns to trained patterns when loaded with a distorted pattern
     def test(self):
         for pattern in self.walsh:
-            for distortion in self.distortions:
-                for i in range(3):
-                    pattern_d = copy.deepcopy(pattern)
-                    for j in range(len(pattern_d)):
-                        if random.random() < distortion:
-                            pattern_d[j] = toggle(pattern_d[j])
-                    self.run(pattern_d, pattern, distortion, i)
-            print "____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
+            # for distortion in self.distortions:
+            for i in range(3):
+                pattern_d = copy.deepcopy(pattern)
+                for j in range(len(pattern_d)):
+                    if random.random() < self.distortions[0]:
+                        pattern_d[j] = toggle(pattern_d[j])
+                self.run(pattern_d, pattern, self.distortions[0], i)
+        print "____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
 
     # Calculates the Hamming Distance between two patterns
     def hamming_dist(self, pattern, orig):
@@ -81,6 +109,7 @@ class Hopfield(Network):
         total_iters = 0
         self.set_activations(pattern_d)
         settled = []
+        # eng_df = []
 
         while not all_done:
             total_iters += 1
@@ -89,6 +118,8 @@ class Hopfield(Network):
                 settled.append(node.activation)
             node = self.nodes[random.randint(0,len(self.nodes) - 1)]
             self.set_inputs()
+            # self.calc_energy()
+            # eng_df.append(self.energy)
             node.update_activation()
 
             if self.changed(settled):
@@ -97,33 +128,45 @@ class Hopfield(Network):
                 iterations_settled += 1
             if iterations_settled == 30:
                 all_done = True
-        before_settled = total_iters - iterations_settled
-        file = open("run_data.csv", 'a')
-        field_names = ['Run', 'Hamming', 'Iter']
-        writer = csv.DictWriter(file,fieldnames=field_names)
-        writer.writerow({"Run": run, "Hamming": self.hamming_dist(settled, orig), "Iter": before_settled})
-        file.close()
 
         self.calc_energy()
-        print """
-        ------------------------------------
-        |             Run           | {s1} |
-        ------------------------------------
-        |          Distortion       | {s2} |
-        ------------------------------------
-        |      Hamming Distance     | {s3} |
-        ------------------------------------
-        | Iterations before settled | {s4} |
-        ------------------------------------
-        |           Energy          | {s5} |
-        ------------------------------------
-        """.format(s1=str(run + 1).center(4), s2 = str(dist).center(4), s3=str(self.hamming_dist(settled, orig)).center(4), s4=str(before_settled).center(4), s5=str(int(self.energy)).center(4))
+
+        print "Walsh Function: " + str(orig)
+        print "Distorted: " +  str(pattern_d)
+        print "Settled: " + str(settled)
+        print "Hamming Distance: " + str(self.hamming_dist(settled, orig))
+        # eng_df.append(self.energy)
+        # before_settled = total_iters - iterations_settled
+        # print """
+        # ------------------------------------
+        # |           Pattern         | {s1} |
+        # ------------------------------------
+        # |             Run           | {s2} |
+        # ------------------------------------
+        # |          Distortion       | {s3} |
+        # ------------------------------------
+        # |      Hamming Distance     | {s4} |
+        # ------------------------------------
+        # | Iterations before settled | {s5} |
+        # ------------------------------------
+        # |           Energy          | {s6} |
+        # ------------------------------------
+        # """.format(s1=str(self.walsh.index(orig) + 1).center(4), s2=str(run + 1).center(4), s3 = str(dist).center(4),
+        #            s4=str(self.hamming_dist(settled, orig)).center(4),
+        #            s5=str(before_settled).center(4), s6=str(int(self.energy)).center(4))
+
+    # An alternate run
+    def alt_run(self):
+        pass
+
 
 # Runs the entire simulation
 def main():
     size = (1000,700)
     net = Hopfield(16,size)
-    net.train_network()
+    # net.train_network()
+    # net.test()
+    net.random_train()
     net.test()
 
 main()
