@@ -13,7 +13,7 @@ def toggle(node):
 class Hopfield(Network):
     def __init__(self, numNodes, screen_size):
         self.numNodes = numNodes
-        self.threshold = 0.0
+        self.threshold = 0
         self.energy = 0.0
         self.screen_size = screen_size
         self.distortions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
@@ -28,16 +28,13 @@ class Hopfield(Network):
     def train_network(self):
         for node in self.nodes:
             for conn in node.incoming:
-                conn.weight = 0.0
+                conn.weight = 0
 
         for pattern in self.walsh:
             self.set_activations(pattern)
             for node in self.nodes:
                 for conn in node.incoming:
                     conn.learn()
-        # self.calc_energy()
-        # print "Energy" + str(self.energy)
-
     def test(self):
         for pattern in self.walsh:
             pattern_d = copy.deepcopy(pattern)
@@ -68,8 +65,7 @@ class Hopfield(Network):
         for i in range(len(self.nodes)):
             if orig[i] != self.nodes[i].activation:
                 return True
-            else:
-                return False
+        return False
 
     def run(self, pattern_d, orig):
         all_done = False
@@ -78,11 +74,14 @@ class Hopfield(Network):
         settled = []
 
         while not all_done:
+            # self.calc_energy()
+            # print "Energy: " + str(self.energy)
             del settled[:]
             for node in self.nodes:
                 settled.append(node.activation)
-            self.set_inputs()
             node = self.nodes[random.randint(0,len(self.nodes) - 1)]
+            # node.update_input()
+            self.set_inputs()
             node.update_activation()
 
             if self.changed(settled):
@@ -99,13 +98,13 @@ class Hopfield(Network):
         print "Energy: " + str(self.energy)
         print "\n"
 
-# def main():
-    # size = (1000,700)
-    # net = Hopfield(16,size)
+def main():
+    size = (1000,700)
+    net = Hopfield(16,size)
     # screen = Graphics(size=size)
     # screen.draw_graph(net.nodes)
     # screen.mainloop(net.nodes)
-    # net.train_network()
-    # net.test()
+    net.train_network()
+    net.test()
 
-# main()
+main()

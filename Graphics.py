@@ -2,7 +2,6 @@
 
 import sys
 from Hopfield import *
-# import Hopfield
 
 class Graphics(object):
     def __init__(self, size=(500,500), caption="Hopfield Network"):
@@ -15,10 +14,6 @@ class Graphics(object):
         pygame.init()
         self.screen = pygame.display.set_mode(self.size)
         pygame.display.set_caption(self.caption)
-
-    def change_node_color(self):
-        pass
-
 
     def draw_graph(self, nodes):
         self.screen.fill(self.screen_color)
@@ -95,10 +90,10 @@ class Graphics(object):
                 self.draw_graph(nodes)
                 self.render_screen()
 
-size = (1000,700)
-net = Hopfield(16,size)
-screen = Graphics(size=size)
-screen.draw_graph(net.nodes)
-screen.mainloop(net.nodes)
+# size = (1000,700)
+# net = Hopfield(16,size)
+# screen = Graphics(size=size)
+# screen.draw_graph(net.nodes)
+# screen.mainloop(net.nodes)
 # net.train_network()
     # net.test()

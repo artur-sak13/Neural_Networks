@@ -84,7 +84,6 @@ class Network(object):
         delta_x, delta_y = self.delta(node, other)
         return math.atan2(delta_y, delta_x)
 
-
     # Sets the initial activation values for the network
     def set_activations(self, activations):
         for node in self.nodes:
@@ -96,10 +95,8 @@ class Network(object):
         for node in self.nodes:
             if node.activation == 1:
                 node.node_color = (0,255,0)
-                # print "Set to Green"
             else:
                 node.node_color = (255,0,0)
-                # print "Set to Orange"
 
     # Update all of the activations in the network
     def update_all_activations(self, i = None):

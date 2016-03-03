@@ -6,7 +6,7 @@ import pygame
 
 class Connection(object):
     # Default connection constructor with optional parameters
-    def __init__(self, recipient = None, sender = None, weight = 0.0):
+    def __init__(self, recipient = None, sender = None, weight = 0):
         self.recipient = recipient
         self.sender = sender
         self.weight = weight
@@ -14,9 +14,9 @@ class Connection(object):
     # Implements Hopfield Learning Algorithm
     def learn(self):
         if self.recipient.activation == self.sender.activation:
-            self.weight += 1.0
+            self.weight += 1
         else:
-            self.weight -= 1.0
+            self.weight -= 1
 
 class Unit(object):
     # Default unit constructor with optional parameters
@@ -74,16 +74,15 @@ class Unit(object):
 
     # Function resets the net input based on adjacent nodes' connection weights and activations
     def update_input(self):
-        self.input = 0.0
+        self.input = 0
         for connection in self.incoming:
-            self.input += connection.weight * float(connection.sender.activation)
+            self.input += connection.weight * connection.sender.activation
 
     # Function updates a node's activation value based on changed net input value
     def update_activation(self):
         if self.input > self.threshold:
             self.activation = 1
             self.node_color = (0,255,0)
-
         else:
             self.activation = 0
             self.node_color = (255,100,0)
