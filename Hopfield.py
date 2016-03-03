@@ -2,6 +2,7 @@
 
 import copy
 from Activations import *
+import csv
 # from Graphics import *
 
 def toggle(node):
@@ -42,14 +43,13 @@ class Hopfield(Network):
     def test(self):
         for pattern in self.walsh:
             for distortion in self.distortions:
-                print "Distortion: " + str(distortion)
                 for i in range(3):
                     pattern_d = copy.deepcopy(pattern)
                     for j in range(len(pattern_d)):
                         if random.random() < distortion:
                             pattern_d[j] = toggle(pattern_d[j])
-                    self.run(pattern_d, pattern)
-            print "____________________END OF PATTERN______________________" + "\n"
+                    self.run(pattern_d, pattern, distortion, i)
+            print "____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
 
     # Calculates the Hamming Distance between two patterns
     def hamming_dist(self, pattern, orig):
@@ -75,20 +75,19 @@ class Hopfield(Network):
         return False
 
     # Runs the network on the distored patterns
-    def run(self, pattern_d, orig):
+    def run(self, pattern_d, orig, dist, run):
         all_done = False
         iterations_settled = 0
+        total_iters = 0
         self.set_activations(pattern_d)
         settled = []
 
         while not all_done:
-            # self.calc_energy()
-            # print "Energy: " + str(self.energy)
+            total_iters += 1
             del settled[:]
             for node in self.nodes:
                 settled.append(node.activation)
             node = self.nodes[random.randint(0,len(self.nodes) - 1)]
-            # node.update_input()
             self.set_inputs()
             node.update_activation()
 
@@ -98,21 +97,32 @@ class Hopfield(Network):
                 iterations_settled += 1
             if iterations_settled == 30:
                 all_done = True
-        print "Walsh Function: " + str(orig)
-        print "Distorted: " +  str(pattern_d)
-        print "Settled: " + str(settled)
-        print "Hamming Distance: " + str(self.hamming_dist(settled, orig))
+        before_settled = total_iters - iterations_settled
+        file = open("run_data.csv", 'a')
+        field_names = ['Run', 'Hamming', 'Iter']
+        writer = csv.DictWriter(file,fieldnames=field_names)
+        writer.writerow({"Run": run, "Hamming": self.hamming_dist(settled, orig), "Iter": before_settled})
+        file.close()
+
         self.calc_energy()
-        print "Energy: " + str(self.energy)
-        print "\n"
+        print """
+        ------------------------------------
+        |             Run           | {s1} |
+        ------------------------------------
+        |          Distortion       | {s2} |
+        ------------------------------------
+        |      Hamming Distance     | {s3} |
+        ------------------------------------
+        | Iterations before settled | {s4} |
+        ------------------------------------
+        |           Energy          | {s5} |
+        ------------------------------------
+        """.format(s1=str(run + 1).center(4), s2 = str(dist).center(4), s3=str(self.hamming_dist(settled, orig)).center(4), s4=str(before_settled).center(4), s5=str(int(self.energy)).center(4))
 
 # Runs the entire simulation
 def main():
     size = (1000,700)
     net = Hopfield(16,size)
-    # screen = Graphics(size=size)
-    # screen.draw_graph(net.nodes)
-    # screen.mainloop(net.nodes)
     net.train_network()
     net.test()
 
