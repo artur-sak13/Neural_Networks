@@ -1,3 +1,3 @@
 # Neural_Networks
 
-Run (for now) with 'python Hopfield.py'
+Run (for now) with `python Hopfield.py`
