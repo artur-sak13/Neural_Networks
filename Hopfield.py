@@ -25,28 +25,33 @@ class Hopfield(Network):
 
         Network.__init__(self, numNodes, screen_size)
 
+    # Function trains network on all walsh function patterns
     def train_network(self):
+        # Clears the net
         for node in self.nodes:
             for conn in node.incoming:
                 conn.weight = 0
-
+        # "Learn" every training pattern
         for pattern in self.walsh:
             self.set_activations(pattern)
             for node in self.nodes:
                 for conn in node.incoming:
                     conn.learn()
+
+    # Tests if network returns to trained patterns when loaded with a distorted pattern
     def test(self):
         for pattern in self.walsh:
-            pattern_d = copy.deepcopy(pattern)
             for distortion in self.distortions:
                 print "Distortion: " + str(distortion)
                 for i in range(3):
+                    pattern_d = copy.deepcopy(pattern)
                     for j in range(len(pattern_d)):
                         if random.random() < distortion:
                             pattern_d[j] = toggle(pattern_d[j])
                     self.run(pattern_d, pattern)
             print "____________________END OF PATTERN______________________" + "\n"
 
+    # Calculates the Hamming Distance between two patterns
     def hamming_dist(self, pattern, orig):
         dist = 0
         for i in range(len(self.nodes)):
@@ -54,6 +59,7 @@ class Hopfield(Network):
                 dist += 1
         return dist
 
+    # Calculates the "energy" of the network
     def calc_energy(self):
         self.energy = 0.0
         for node in self.nodes:
@@ -61,12 +67,14 @@ class Hopfield(Network):
                 self.energy += connection.weight * (node.activation * connection.sender.activation)
         self.energy *= -0.5
 
+    # Checks if current state differs from previous state
     def changed(self, orig):
         for i in range(len(self.nodes)):
             if orig[i] != self.nodes[i].activation:
                 return True
         return False
 
+    # Runs the network on the distored patterns
     def run(self, pattern_d, orig):
         all_done = False
         iterations_settled = 0
@@ -98,6 +106,7 @@ class Hopfield(Network):
         print "Energy: " + str(self.energy)
         print "\n"
 
+# Runs the entire simulation
 def main():
     size = (1000,700)
     net = Hopfield(16,size)
