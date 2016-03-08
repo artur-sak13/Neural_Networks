@@ -1,12 +1,21 @@
+import csv
+
 class Data(object):
     def __init__(self):
-        self.file_name = "Experiment_Data.txt"
-        self.run_energies = {}
+        self.file_name = "Async_Updating.txt"
+        self.energies = "Energies.csv"
 
-    def get_energy_data(self, eng, run, pattern):
-        self.
+    def save_data(self, data):
+        with open(self.file_name, 'a') as file:
+            file.write(data)
+        file.close()
 
-    def get_data(self):
-        self.
-
-    def save_data(self):
+    def write_energies(self, data):
+        with open(self.energies, 'a+') as file:
+            writer = csv.writer(file, delimiter=',')
+            for num in data:
+                file.write(str(num))
+                file.write("\n")
+            file.write("\n")
+            file.write("\n")
+        file.close()
