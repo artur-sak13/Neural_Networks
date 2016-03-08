@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dd8022c-de1e-4b59-ac13-6a3c8c6e1b9a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Data.py" afterPath="$PROJECT_DIR$/Data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Hopfield.py" afterPath="$PROJECT_DIR$/Hopfield.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Structures.py" afterPath="$PROJECT_DIR$/Structures.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Neural_Networks.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,8 +98,8 @@
       <file leaf-file-name="Structures.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Structures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6415094">
-              <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.5660377">
+              <caret line="90" column="47" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
               <folding>
                 <element signature="e#28#39#0" expanded="true" />
               </folding>
@@ -117,9 +115,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Structures.py" />
         <option value="$PROJECT_DIR$/Data.py" />
         <option value="$PROJECT_DIR$/Hopfield.py" />
+        <option value="$PROJECT_DIR$/Structures.py" />
       </list>
     </option>
   </component>
@@ -458,8 +456,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Structures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6415094">
-          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.5660377">
+          <caret line="90" column="47" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
           <folding>
             <element signature="e#28#39#0" expanded="true" />
           </folding>
