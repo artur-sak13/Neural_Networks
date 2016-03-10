@@ -2,7 +2,7 @@
 
 import math
 import random
-# import pygame
+import pygame
 
 class Connection(object):
     # Default connection constructor with optional parameters

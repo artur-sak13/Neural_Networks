@@ -91,8 +91,8 @@ class Hopfield(Network):
                         if random.random() < self.distortions[0]:
                             pattern_d[j] = toggle(pattern_d[j])
                     self.run(pattern_d, pattern, self.distortions[0], i)
-                self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n")
-                # print "\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
+                # self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n")
+                print "\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
 
         else:
             for pattern in self.walsh:
@@ -103,8 +103,8 @@ class Hopfield(Network):
                             if random.random() < distortion:
                                 pattern_d[j] = toggle(pattern_d[j])
                         self.run(pattern_d, pattern, distortion, i)
-                self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n")
-                # print "\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
+                # self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n")
+                print "\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(pattern) + 1) + "\n"
 
     def alt_test(self):
         for distortion in self.distortions:
@@ -114,11 +114,12 @@ class Hopfield(Network):
                     if random.random() < distortion:
                         pattern_d[j] = toggle(pattern_d[j])
                 self.alt_run(pattern_d,self.walsh[3], distortion,i, True)
-            self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(self.walsh[3]) + 1))
+            # self.data.save_data("\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(self.walsh[3]) + 1))
+            print "\n"+"____________________END OF PATTERN {d}______________________".format(d=self.walsh.index(self.walsh[3]) + 1)
 
 
     def anotha_one(self):
-        self.data.save_data("ADDED ANOTHER!")
+        # self.data.save_data("ADDED ANOTHER!")
         pattern = [1 if random.random() < 0.5 else 0 for x in range(16)]
         self.walsh.append(pattern)
 
@@ -217,7 +218,9 @@ class Hopfield(Network):
         """.format(s1=str(self.walsh.index(orig) + 1).center(4),s2=''.join(str(orig)[1:-1].split(',')).center(4), s3=str(run + 1).center(4), s4 = str(dist).center(4),
                    s5=''.join(str(pattern_d)[1:-1].split(',')).center(4), s6=str(self.hamming_dist(settled, orig)).center(4),s7=''.join(str(settled).split(','))[1:-1].center(4),
                    s8=str(before_settled).center(4), s9=str(int(self.energy)).center(4))
-        self.data.save_data(info)
+
+        print info
+        # self.data.save_data(info)
 
 
     # An alternate run
@@ -250,7 +253,6 @@ class Hopfield(Network):
             if iterations_settled == 30:
                 all_done = True
             elif total_iters == 300:
-
                 break
 
         self.calc_energy()
@@ -288,7 +290,8 @@ class Hopfield(Network):
         """.format(s1=str(self.walsh.index(orig) + 1).center(4),s2=''.join(str(orig)[1:-1].split(',')).center(4), s3=str(run + 1).center(4), s4 = str(dist).center(4),
                    s5=''.join(str(pattern_d)[1:-1].split(',')).center(4), s6=str(self.hamming_dist(settled, orig)).center(4),s7=''.join(str(settled).split(','))[1:-1].center(4),
                    s8=str(before_settled).center(4), s9=str(int(self.energy)).center(4))
-        self.data.save_data(info)
+        # self.data.save_data(info)
+        print info
 
 
 
@@ -313,7 +316,7 @@ def main():
     # net.test(True)
 
     # Async and Sync Updating
-    net.alt_train()
-    net.alt_test()
+    # net.alt_train()
+    # net.alt_test()
 
-main()
+# main()

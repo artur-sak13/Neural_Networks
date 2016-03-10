@@ -96,7 +96,7 @@ class Network(object):
             if node.activation == 1:
                 node.node_color = (0,255,0)
             else:
-                node.node_color = (255,0,0)
+                node.node_color = (255,100,0)
 
     # Update all of the activations in the network
     def update_all_activations(self, i = None):

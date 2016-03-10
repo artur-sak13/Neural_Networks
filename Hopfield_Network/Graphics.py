@@ -54,10 +54,13 @@ class Graphics(object):
         nodes = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
         nodes  = grapher.set_activations(nodes)
         font = pygame.font.Font(None, 20)
+        grapher.train_network()
+        grapher.test()
 
         while is_running:
             self.draw_graph(nodes)
             self.render_screen()
+            pygame.sleep(100)
             event = pygame.event.poll()
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -90,10 +93,10 @@ class Graphics(object):
                 self.draw_graph(nodes)
                 self.render_screen()
 
-# size = (1000,700)
-# net = Hopfield(16,size)
-# screen = Graphics(size=size)
-# screen.draw_graph(net.nodes)
-# screen.mainloop(net.nodes)
+size = (1000,700)
+net = Hopfield(16,size)
+screen = Graphics(size=size)
+screen.draw_graph(net.nodes)
+screen.mainloop(net.nodes)
 # net.train_network()
-    # net.test()
+# net.test()
