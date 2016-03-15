@@ -10,9 +10,14 @@ class Perceptron(Network):
         self. patters = []
         self.eta = 0
 
-
-    def back_prop_of_errors(self):
+    def connect_nodes(self):
         pass
 
-    def prop_of_activations(self):
+    def forward_prop(self):
+        pass
+
+    def back_prop(self):
+        pass
+
+    def train(self):
         pass

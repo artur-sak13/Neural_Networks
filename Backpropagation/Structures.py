@@ -1,7 +1,6 @@
 # @author Artur Sak (sak2)
 
-import math
-import random
+import math, random
 # import pygame
 
 class Connection(object):
@@ -9,27 +8,29 @@ class Connection(object):
     def __init__(self, recipient = None, sender = None, weight = 0):
         self.recipient = recipient
         self.sender = sender
-        self.weight = weight
-        self.delta_weight = 0
+        self.weight = 2.0 * (random.random() - 0.5)
+        self.delta_weight = 0.0
 
-    # Implements Hopfield Learning Algorithm
-    def learn(self):
-        if self.recipient.activation == self.sender.activation:
-            self.weight += 1
-        else:
-            self.weight -= 1
+        if self.sender:
+            self.sender.outgoing_connections.append(self)
+        if self.recipient:
+            self.recipient.incoming_connections(self)
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, input = 0.0, activation = 0, incoming = None, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+    def __init__(self, input = 0.0, activation = 0, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
+        self.layer
+        self.index = index
+        self.error = error
+        self.bias_node = bias_node
         self.threshold = 0.0
         self.node_color = (255,100,0)
-        if incoming is None:
-            self.incoming = []
-        else:
-            self.incoming = incoming
+
+        self.incoming = []
+        self.outgoing = []
+
         # Node positions for PyGame Visuals
         self._position = (0,0)
         self.x_range = x_range
@@ -79,45 +80,12 @@ class Unit(object):
         for connection in self.incoming:
             self.input += connection.weight * connection.sender.activation
 
-    # Function updates a node's activation value based on changed net input value
+    # Sigmoid function
     def update_activation(self):
-        if self.input > self.threshold:
-            self.activation = 1
-            self.node_color = (0,255,0)
-        else:
-            self.activation = 0
-            self.node_color = (255,100,0)
-
-    # Logistic activation function
-    def logistic_activation(self, temperature=0.0):
-            self.activation = 1 / (1 + math.e**(-self.input/temperature))
-
-    # Linear activation function
-    def linear_activaton(self):
-        self.activation = self.input - 0.5
-
-    # Conditional Activation function
-    def conditional_activation(self):
-        if self.input > 1.0:
+        if self.bias_node:
             self.activation = 1.0
-        elif self.input < 0.75:
-            self.activation = 0.0
         else:
-            self.activation = float(self.input)
-
-    # Function implements three different temporal integrator activation functions
-    def temporal_integrator(self, gamma=None, delta=None, inhibit=None):
-        # Simple temporal integrator
-        if delta == None and inhibit == None:
-            delta_act = gamma * (1.0 - self.activation) * self.input
-        else:
-            # Grossberg activation function
-            if inhibit != None:
-                delta_act = gamma * ((self.input + inhibit) * (1.0 - self.activation) - (1.0 + self.activation) * inhibit) - (delta * self.activation)
-            # Leaky integrator
-            else:
-                delta_act = (gamma*(1.0 - self.activation)*self.input) - (delta * self.activation)
-        self.activation += delta_act
+            self.activation = 1 / (1 + math.e**(-self.input/temperature))
 
     # Creates connection
     def add_neighbor(self, connection):
