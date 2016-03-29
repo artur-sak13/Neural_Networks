@@ -87,7 +87,6 @@ class Unit(object):
             self.error += connection.weight * connection.recipient.error
         self.error += (self.activation * (1 - self.activation))
 
-
     # Sigmoid function
     def update_activation(self):
         self.activation = 1 / (1 + math.exp(-self.input))

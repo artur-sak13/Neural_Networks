@@ -130,9 +130,8 @@ class Network(object):
 
     # Feed training pattern to network
     def forward_feed(self, input_pattern):
-    # Iterate through layers and update activations based on sigmoid (Gradient Descent)
-        for i in range(len(self.layers)):
-            self.update_all_activations(i)
+        for i in range(len(self.layers - 1)):
+            self.update_all_activations(self.layers[i + 1])
 
     # Propagate errors backward through network
     def back_prop(self, desired_output):
@@ -149,19 +148,16 @@ class Network(object):
 
     # Train the network based on Backpropagation algorithm
     def train(self, patterns):
-        all_done = False
+
         for input_pattern in patterns:
-            while not all_done:
                 self.forward_feed(input_pattern)
                 self.back_prop(input_pattern)
 
             # TODO: Determine settling critereon for network
-            if settled:
-                all_done = True
 
     # Update all of the activations in the network
-    def update_all_activations(self, idx):
-        for node in self.layers[idx].nodes:
+    def update_all_activations(self, layer):
+        for node in layer.nodes:
             node.update_activation()
 
     # Calculate the error for the output layer (based on discrepancy between original patterns and settled activations)
@@ -180,22 +176,14 @@ class Network(object):
     # Update each weight with the change in weight
     def update_weight(self):
         conn.weight += conn.delta_weight
-        # TODO: How do you calculate momentum?
+        # TODO: Momentum is some constant < 1?
         conn.delta_weight *= momentum
 
     # Calculate the error of the entire network
     def calculate_global_error(self):
         global_error = 0.0
-        for layer in self.layers:
-            for node in layer.nodes:
-                global_error += node.error
-        return global_error
 
     # Calculate the inputs for all of the nodes in the network
-    def set_inputs(self, const=None):
-        if const:
-            for node in self.nodes:
-                node.input = const
-        else:
-            for node in self.nodes:
-                node.update_input()
+    def set_inputs(self):
+        for node in self.nodes:
+            node.update_input()
