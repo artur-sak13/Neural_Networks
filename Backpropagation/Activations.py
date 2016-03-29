@@ -118,6 +118,7 @@ class Network(object):
     #         else:
     #             node.node_color = (255,0,0)
 
+    # Connect each node in each layer to every node in next layer
     def connect_nodes(self):
         for layer in self.layers:
             for other in self.layers:
@@ -127,11 +128,13 @@ class Network(object):
                             self.connections.append(Connection(recipient=node,sender=other_node)
 
 
+    # Feed training pattern to network
     def forward_feed(self, input_pattern):
-        # Iterate through layers and update activations based on sigmoid
+    # Iterate through layers and update activations based on sigmoid (Gradient Descent)
         for i in range(len(self.layers)):
             self.update_all_activations(i)
 
+    # Propagate errors backward through network
     def back_prop(self, desired_output):
         # Calculate error at output level and propagate errors backward through net
         for i in range(len(self.layers)):
@@ -144,6 +147,7 @@ class Network(object):
             else:
                 self.layers[-i].nodes.calc_errors()
 
+    # Train the network based on Backpropagation algorithm
     def train(self, patterns):
         all_done = False
         for input_pattern in patterns:
@@ -160,21 +164,32 @@ class Network(object):
         for node in self.layers[idx].nodes:
             node.update_activation()
 
+    # Calculate the error for the output layer (based on discrepancy between original patterns and settled activations)
     def calc_output_error(self, desired, node):
         return (desired - node.activation) * self.activation (1 - self.activation)
 
+    # Determine the errors for hidden layer nodes
     def calc_errors(self, idx):
         for node in self.layers[idx].nodes:
             node.calc_errors()
 
+    # Calculate the change in weight based on error and learning rate
     def delta_weight(self, conn):
         conn.delta_weight = learning_rate * (conn.recipient.error *  conn.weight)
 
+    # Update each weight with the change in weight
     def update_weight(self):
         conn.weight += conn.delta_weight
+        # TODO: How do you calculate momentum?
         conn.delta_weight *= momentum
 
-
+    # Calculate the error of the entire network
+    def calculate_global_error(self):
+        global_error = 0.0
+        for layer in self.layers:
+            for node in layer.nodes:
+                global_error += node.error
+        return global_error
 
     # Calculate the inputs for all of the nodes in the network
     def set_inputs(self, const=None):
