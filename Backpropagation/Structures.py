@@ -5,7 +5,7 @@ import math, random
 
 class Connection(object):
     # Default connection constructor with optional parameters
-    def __init__(self, recipient = None, sender = None, weight = 0):
+    def __init__(self, recipient = None, sender = None, weight = 0.0):
         self.recipient = recipient
         self.sender = sender
         self.weight = 2.0 * (random.random() - 0.5)
@@ -18,7 +18,7 @@ class Connection(object):
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, input = 0.0, activation = 0, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+    def __init__(self, input = 0.0, activation = 0.0, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
         self.input = input
         self.activation = activation
         self.layer
@@ -76,17 +76,18 @@ class Unit(object):
 
     # Function resets the net input based on adjacent nodes' connection weights and activations
     def update_input(self):
-        self.input = 0
+        self.input = 0.0
         for connection in self.incoming:
             self.input += connection.weight * connection.sender.activation
+        self.input = self.input + self.bias
+
+    def calc_error(self):
+        self.error = 0.0
+        for connection in self.outgoing:
+            self.error += connection.weight * connection.recipient.error
+        self.error += (self.activation * (1 - self.activation))
+
 
     # Sigmoid function
     def update_activation(self):
-        if self.bias_node:
-            self.activation = 1.0
-        else:
-            self.activation = 1 / (1 + math.e**(-self.input/temperature))
-
-    # Creates connection
-    def add_neighbor(self, connection):
-        self.incoming.append(connection)
+        self.activation = 1 / (1 + math.exp(-self.input))

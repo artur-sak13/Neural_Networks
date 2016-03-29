@@ -9,23 +9,23 @@ def mul_t_constant(t, constant):
     return tuple(x * constant for x in t)
 
 class Layer(object):
-    def __init__(self, num_nodes, index, bias_node = True, output_layer = False)
-    self.nodes = []
-    self.index = index
-    self.has_bias_node = has_bias_node
-    self.output_layer = output_layer
+    def __init__(self, num_nodes, index, bias_node = True, output_layer = False):
+        self.nodes = []
+        self.index = index
+        self.has_bias_node = has_bias_node
+        self.output_layer = output_layer
 
-    for i in xrange(num_nodes):
-        self.nodes.append(Unit(i))
-    if self.has_bias_node:
-        self.nodes.append(Unit(num_nodes, True))
+        for i in xrange(num_nodes):
+            self.nodes.append(Unit(i))
+            if self.has_bias_node:
+                self.nodes.append(Unit(num_nodes, True))
 
 class Network(object):
     def __init__(self, nodes_per_layer, screen_size):
         # Initializes network with numNodes attribute and list of nodes
         self.layers = []
-
         layer_number = 0
+
         for num_nodes in nodes_per_layer:
             layer_number += 1
             if layer_number == len(nodes_per_layer):
@@ -119,21 +119,62 @@ class Network(object):
     #             node.node_color = (255,0,0)
 
     def connect_nodes(self):
-        pass
+        for layer in self.layers:
+            for other in self.layers:
+                if layer != other:
+                    for node in layer.nodes:
+                        for other_node in other.nodes:
+                            self.connections.append(Connection(recipient=node,sender=other_node)
 
-    def forward_prop(self):
-        pass
 
-    def back_prop(self):
-        pass
+    def forward_feed(self, input_pattern):
+        # Iterate through layers and update activations based on sigmoid
+        for i in range(len(self.layers)):
+            self.update_all_activations(i)
 
-    def train(self):
-        pass
+    def back_prop(self, desired_output):
+        # Calculate error at output level and propagate errors backward through net
+        for i in range(len(self.layers)):
+            if self.layers[-i].output_layer:
+                for node in self.layers[-i].nodes:
+
+                    # TODO: Calculate deltas and update weights
+
+                    self.error = self.calc_output_error(desired_output, node)
+            else:
+                self.layers[-i].nodes.calc_errors()
+
+    def train(self, patterns):
+        all_done = False
+        for input_pattern in patterns:
+            while not all_done:
+                self.forward_feed(input_pattern)
+                self.back_prop(input_pattern)
+
+            # TODO: Determine settling critereon for network
+            if settled:
+                all_done = True
 
     # Update all of the activations in the network
-    def update_all_activations(self, i = None):
-        for node in self.nodes:
+    def update_all_activations(self, idx):
+        for node in self.layers[idx].nodes:
             node.update_activation()
+
+    def calc_output_error(self, desired, node):
+        return (desired - node.activation) * self.activation (1 - self.activation)
+
+    def calc_errors(self, idx):
+        for node in self.layers[idx].nodes:
+            node.calc_errors()
+
+    def delta_weight(self, conn):
+        conn.delta_weight = learning_rate * (conn.recipient.error *  conn.weight)
+
+    def update_weight(self):
+        conn.weight += conn.delta_weight
+        conn.delta_weight *= momentum
+
+
 
     # Calculate the inputs for all of the nodes in the network
     def set_inputs(self, const=None):
