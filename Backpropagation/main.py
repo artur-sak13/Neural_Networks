@@ -1,3 +1,6 @@
+from Activations import *
+
+
 set1 = [
        [[0,0,0,0,0,1,0,0,0,0], [0,0,0,0,0,0,0,0,0,1]],
        [[0,0,0,0,1,0,0,0,1,0], [0,0,0,1,0,0,0,0,0,0]],
@@ -23,3 +26,9 @@ desired_outputs = [
                   [0.02,0.02,0.95,0.02],
                   [0.02,0.02,0.02,0.95]
                   ]
+
+training_sets = [set1, set2, set3]
+
+net = Network([10,4])
+net.train(training_sets, desired_outputs)
+# net.reveal_network()

@@ -12,20 +12,23 @@ class Connection(object):
         self.delta_weight = 0.0
 
         if self.sender:
-            self.sender.outgoing_connections.append(self)
+            self.sender.outgoing.append(self)
         if self.recipient:
-            self.recipient.incoming_connections(self)
+            self.recipient.incoming.append(self)
+
+    def reveal(self):
+        # print "HI!"
+        print "Connection from ",str(self.sender.index)," to ",str(self.recipient.index)," = %.2f" %self.weight
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, input = 0.0, activation = 0.0, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
-        self.input = input
-        self.activation = activation
-        self.layer
+    def __init__(self, layer, index=0, bias_node=False, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+        self.input = 0.0
+        self.activation = 0.0
+        self.layer = layer
         self.index = index
-        self.error = error
         self.bias_node = bias_node
-        self.threshold = 0.0
+        self.error = 0.0
         self.node_color = (255,100,0)
 
         self.incoming = []
@@ -79,14 +82,16 @@ class Unit(object):
         self.input = 0.0
         for connection in self.incoming:
             self.input += connection.weight * connection.sender.activation
-        self.input = self.input + self.bias
 
     def calc_error(self):
         self.error = 0.0
         for connection in self.outgoing:
             self.error += connection.weight * connection.recipient.error
-        self.error += (self.activation * (1 - self.activation))
+        self.error *= (self.activation * (1 - self.activation))
 
     # Sigmoid function
     def update_activation(self):
-        self.activation = 1 / (1 + math.exp(-self.input))
+        if self.bias_node:
+            self.activation = 1.0
+        else:
+            self.activation = 1.0 / (1.0 + math.exp(-self.input))
