@@ -1,7 +1,6 @@
 # @author Artur Sak (sak2)
 
 import math, random
-# import pygame
 
 class Connection(object):
     # Default connection constructor with optional parameters
@@ -22,60 +21,16 @@ class Connection(object):
 
 class Unit(object):
     # Default unit constructor with optional parameters
-    def __init__(self, layer, index=0, bias_node=False, position = None, mass = 1, x_range=(0,800), y_range=(0,800)):
+    def __init__(self, layer, index=0, bias_node=False):
         self.input = 0.0
         self.activation = 0.0
         self.layer = layer
         self.index = index
         self.bias_node = bias_node
         self.error = 0.0
-        self.node_color = (255,100,0)
 
         self.incoming = []
         self.outgoing = []
-
-        # Node positions for PyGame Visuals
-        self._position = (0,0)
-        self.x_range = x_range
-        self.y_range = y_range
-
-        if not position:
-            xmin, xmax = x_range
-            ymin, ymax = y_range
-            self.position = (random.randint(xmin, xmax), random.randint(ymin,ymax))
-        else:
-            self.position = position
-        # Physical attributes added for visualization
-        self.charge = 1
-        self.velocity = (0,0)
-        self.mass = mass
-        self.static = False
-
-    def _get_position(self):
-        return self._position
-    def _set_position(self, value):
-        self.x, self.y = value
-    position = property(_get_position, _set_position)
-
-    def _get_x(self):
-        x, y = self._position
-        return x
-    def _set_x(self, value):
-        x, y = self._position
-        self._position = (value, y)
-    x = property(_get_x, _set_x)
-
-    def _get_y(self):
-        x, y = self._position
-        return y
-    def _set_y(self, value):
-        x, y = self._position
-        self._position = (x, value)
-    y = property(_get_y, _set_y)
-
-    def _get_rect(self):
-        return pygame.Rect(self.x - 5, self.y - 5, 10, 10)
-    rect = property(_get_rect)
 
     # Function resets the net input based on adjacent nodes' connection weights and activations
     def update_input(self):
