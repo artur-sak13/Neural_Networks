@@ -42,8 +42,6 @@ class Network(object):
                     for j in range(len(self.layers[i + 1].nodes) - 1):
                         self.connections.append(Connection(recipient=self.layers[i + 1].nodes[j], sender=node))
 
-        # for conn in self.connections:
-        #     conn.reveal()
     def reveal_network(self):
         for conn in self.connections:
             conn.reveal()
@@ -56,7 +54,7 @@ class Network(object):
     # Propagate errors backward through network
     def back_prop(self):
         #  Propagate errors backward through net based on output errors (Gradient Descent)
-        for i in range(len(self.layers)):
+        for i in range(1, len(self.layers) - 1):
             if not self.layers[-i].output_layer:
                 self.calc_errors(self.layers[-i])
 
@@ -69,28 +67,39 @@ class Network(object):
             print "Node %d:" %(node.index + 1), node.activation
 
     # Train the network based on Backpropagation algorithm
-    def train(self, sets, desired_outputs):
+    def train(self, training_set, desired_outputs):
         epoch = 0
         while True:
             epoch += 1
-            for training_set in sets:
-                for category, desired_output in zip(training_set, desired_outputs):
-                    for pattern in category:
-                        self.global_error = 0.0
-                        self.impose_pattern(pattern)
-                        self.feed_forward()
-                        self.calc_output_errors(desired_output)
-                        self.calculate_global_error()
-                        self.back_prop()
-                self.update_weights()
-
-            self.calculate_global_error()
-            print "Epoch %d Error:" %(epoch), self.global_error
-            if self.global_error < 0.01 or epoch == 100:
+            for category, desired_output in zip(training_set, desired_outputs):
+                for pattern in category:
+                    # self.global_error = 0.0
+                    self.impose_pattern(pattern)
+                    self.feed_forward()
+                    self.calc_output_errors(desired_output)
+                    self.calculate_global_error()
+                    self.back_prop()
+            self.update_weights()
+            # self.calculate_global_error()
+            # print "Epoch %d Error:" %(epoch), self.global_error
+            if self.global_error <= 0.01 or epoch == 10000:
                 break
-            # else:
-                # self.global_error = 0.0
+            else:
+                self.global_error = 0.0
+        # print "Epochs to settle: ", epoch
 
+    def test(self, pattern):
+        self.impose_pattern(pattern)
+        self.feed_forward()
+        self.reveal_outputs()
+
+    def reveal_outputs(self):
+        # store = []
+        for node in self.layers[-1].nodes:
+            # store.append(node.activation)
+            print "Node %d Activation: " %(node.index + 1), node.activation
+        print "\n"
+        # print store
     # Update all of the inputs and activations in the layer
     def update_all_nodes(self, layer):
         for node in layer.nodes:
@@ -100,6 +109,7 @@ class Network(object):
     # Calculate the error for the output layer (based on discrepancy between original patterns and settled activations)
     def calc_output_errors(self, desired):
         for node in self.layers[-1].nodes:
+            node.unmodifed_error = (desired[node.index] - node.activation)
             node.error = (desired[node.index] - node.activation) * node.activation * (1.0 - node.activation)
             self.accumulate_delta(node)
 
@@ -111,7 +121,7 @@ class Network(object):
 
     # Calculate the change in weight based on error and learning rate
     def delta_weight(self, conn):
-        conn.delta_weight = self.learning_rate * (conn.recipient.error *  conn.sender.activation)
+        conn.delta_weight += self.learning_rate * (conn.recipient.error *  conn.sender.activation)
 
     def accumulate_delta(self, node):
         for conn in node.incoming:
@@ -126,4 +136,4 @@ class Network(object):
     # Calculate the error of the entire network
     def calculate_global_error(self):
         for node in self.layers[-1].nodes:
-            self.global_error += (node.error)**2
+            self.global_error += (node.unmodifed_error)**2

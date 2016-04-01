@@ -16,7 +16,6 @@ class Connection(object):
             self.recipient.incoming.append(self)
 
     def reveal(self):
-        # print "HI!"
         print "Connection from ",str(self.sender.index)," to ",str(self.recipient.index)," = %.2f" %self.weight
 
 class Unit(object):
@@ -28,6 +27,7 @@ class Unit(object):
         self.index = index
         self.bias_node = bias_node
         self.error = 0.0
+        self.unmodifed_error = 0.0
 
         self.incoming = []
         self.outgoing = []
@@ -40,6 +40,7 @@ class Unit(object):
 
     def calc_error(self):
         self.error = 0.0
+        self.unmodifed_error = 0.0
         for connection in self.outgoing:
             self.error += connection.weight * connection.recipient.error
         self.error *= (self.activation * (1 - self.activation))
