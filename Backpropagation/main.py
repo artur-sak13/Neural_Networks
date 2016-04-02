@@ -39,12 +39,26 @@ desired_outputs = [
 
 training_sets = [set1, set2, set3]
 
-net = Network([10,4])
+def run_undistorted(net):
+    for training_set in training_sets:
+        net.train(training_set, desired_outputs)
+        for category in training_set:
+            print "Category %s \n" %(training_set.index(category) + 1)
+            print str(desired_outputs[training_set.index(category)]) + "\n"
+            for pattern in category:
+                net.test(pattern)
+        print "_________________________________________________________________________________"
 
-net.train(set3, desired_outputs)
-for category in set3:
-    print "Category %s \n" %(set3.index(category) + 1)
-    print str(desired_outputs[set3.index(category)]) + "\n"
-    for pattern in category:
-        net.test(pattern)
-# net.reveal_network()
+def run_distorted(net):
+    for training_set in training_sets:
+        net.train(training_set, desired_outputs)
+        for category in training_set:
+            print "Category %s \n" %(training_set.index(category) + 1)
+            print str(desired_outputs[training_set.index(category)]) + "\n"
+            for pattern in category:
+                pattern = distort(pattern)
+                net.test(pattern)
+        print "_________________________________________________________________________________"
+
+net = Network([10,10,4])
+run_distorted(net)
