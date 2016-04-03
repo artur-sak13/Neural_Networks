@@ -73,33 +73,52 @@ class Network(object):
             epoch += 1
             for category, desired_output in zip(training_set, desired_outputs):
                 for pattern in category:
-                    # self.global_error = 0.0
                     self.impose_pattern(pattern)
                     self.feed_forward()
                     self.calc_output_errors(desired_output)
                     self.calculate_global_error()
                     self.back_prop()
             self.update_weights()
-            # self.calculate_global_error()
-            # print "Epoch %d Error:" %(epoch), self.global_error
-            if self.global_error <= 0.01 or epoch == 10000:
+            if self.global_error <= 0.2 or epoch == 10000:
                 break
             else:
                 self.global_error = 0.0
-        # print "Epochs to settle: ", epoch
+        print "Epochs to settle: ", epoch, "\n"
+        print "Ex-anti Error: ", self.global_error, "\n"
 
-    def test(self, pattern):
-        self.impose_pattern(pattern)
+    def train_encoder(self, patterns, desired_outputs):
+        epoch = 0
+        while True:
+            epoch += 1
+            for pattern, desired_output in zip(patterns, desired_outputs):
+                self.impose_pattern(pattern)
+                self.feed_forward()
+                self.calc_output_errors(desired_output)
+                self.calculate_global_error()
+                self.back_prop()
+            self.update_weights()
+
+            if self.global_error <= 0.75 or epoch == 10000:
+                break
+            else:
+                self.global_error = 0.0
+
+        print "Epochs to settle: ", epoch, "\n"
+
+    def test(self, pattern, d_pattern):
+        self.impose_pattern(d_pattern)
         self.feed_forward()
+        self.global_error = 0.0
+        self.calc_output_errors(pattern)
+        self.calculate_global_error()
+        print "Global Error: %s \n" %(self.global_error)
         self.reveal_outputs()
 
     def reveal_outputs(self):
-        # store = []
         for node in self.layers[-1].nodes:
-            # store.append(node.activation)
             print "Node %d Activation: " %(node.index + 1), node.activation
         print "\n"
-        # print store
+
     # Update all of the inputs and activations in the layer
     def update_all_nodes(self, layer):
         for node in layer.nodes:
