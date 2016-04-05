@@ -1,0 +1,238 @@
+TRAINING SET 1
+Epochs to settle:  55 
+
+Ex-anti Error:  0.198914148587 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Distortion Level: 0.43625733057
+Global Error: 0.170279968993 
+
+Node 1 Activation:  0.633874613396
+Node 2 Activation:  0.229912070729
+Node 3 Activation:  0.0935644948484
+Node 4 Activation:  0.0516602811302
+
+
+Distortion Level: 0.466946411774
+Global Error: 0.239884766761 
+
+Node 1 Activation:  0.526457679454
+Node 2 Activation:  0.144275499857
+Node 3 Activation:  0.0712577880254
+Node 4 Activation:  0.146934508851
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Distortion Level: 0.512676805264
+Global Error: 0.0752953013781 
+
+Node 1 Activation:  0.0892731655103
+Node 2 Activation:  0.745494251037
+Node 3 Activation:  0.0798975722096
+Node 4 Activation:  0.129159811583
+
+
+Distortion Level: 1.12671762302
+Global Error: 0.10007621822 
+
+Node 1 Activation:  0.0298716538398
+Node 2 Activation:  0.82547242927
+Node 3 Activation:  0.132619020181
+Node 4 Activation:  0.271827232141
+
+
+Category 3 
+
+[0.02, 0.02, 0.98, 0.02]
+
+Distortion Level: 0.967166440389
+Global Error: 0.294050409907 
+
+Node 1 Activation:  0.0983061292703
+Node 2 Activation:  0.209224335528
+Node 3 Activation:  0.490355639765
+Node 4 Activation:  0.131180534988
+
+
+Distortion Level: 0.699192128894
+Global Error: 0.162700819445 
+
+Node 1 Activation:  0.128495329245
+Node 2 Activation:  0.300734258245
+Node 3 Activation:  0.712902205733
+Node 4 Activation:  0.0478680376356
+
+
+Category 4 
+
+[0.02, 0.02, 0.02, 0.98]
+
+Distortion Level: 0.764307273289
+Global Error: 0.0538762026421 
+
+Node 1 Activation:  0.0259007569862
+Node 2 Activation:  0.0876893627541
+Node 3 Activation:  0.144258422077
+Node 4 Activation:  0.796099542084
+
+
+Distortion Level: 0.511462076442
+Global Error: 0.0458716694936 
+
+Node 1 Activation:  0.0907833892174
+Node 2 Activation:  0.0669153755483
+Node 3 Activation:  0.0945177516857
+Node 4 Activation:  0.798045517985
+
+
+_________________________________________________________________________________
+TRAINING SET 2
+Epochs to settle:  9 
+
+Ex-anti Error:  0.191855256888 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Distortion Level: 0.522127388398
+Global Error: 0.0910111069985 
+
+Node 1 Activation:  0.726070420628
+Node 2 Activation:  0.0427587800698
+Node 3 Activation:  0.0235211248768
+Node 4 Activation:  0.181246752921
+
+
+Distortion Level: 0.367587688903
+Global Error: 0.0958378944905 
+
+Node 1 Activation:  0.711659452622
+Node 2 Activation:  0.152277606506
+Node 3 Activation:  0.0119182131262
+Node 4 Activation:  0.0991742676713
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Distortion Level: 0.615152580043
+Global Error: 0.167479977404 
+
+Node 1 Activation:  0.219311911211
+Node 2 Activation:  0.643288752398
+Node 3 Activation:  0.00900518880703
+Node 4 Activation:  0.139412684915
+
+
+Distortion Level: 0.508620227434
+Global Error: 0.0656676779016 
+
+Node 1 Activation:  0.0225156523254
+Node 2 Activation:  0.822044802404
+Node 3 Activation:  0.027004887706
+Node 4 Activation:  0.221649290838
+
+
+Category 3 
+
+[0.02, 0.02, 0.98, 0.02]
+
+Distortion Level: 0.63168054438
+Global Error: 0.171100849428 
+
+Node 1 Activation:  0.0247317076603
+Node 2 Activation:  0.0602864107744
+Node 3 Activation:  0.71832453213
+Node 4 Activation:  0.337775730654
+
+
+Distortion Level: 0.413628923993
+Global Error: 0.0754811649662 
+
+Node 1 Activation:  0.0682361431085
+Node 2 Activation:  0.0231082569399
+Node 3 Activation:  0.758044985579
+Node 4 Activation:  0.174533976122
+
+
+Category 4 
+
+[0.02, 0.02, 0.02, 0.98]
+
+Distortion Level: 0.637518677285
+Global Error: 0.080418154928 
+
+Node 1 Activation:  0.167409861954
+Node 2 Activation:  0.0442871893304
+Node 3 Activation:  0.0269925741162
+Node 4 Activation:  0.739064896977
+
+
+Distortion Level: 0.542393631523
+Global Error: 0.0307494102719 
+
+Node 1 Activation:  0.0759233350969
+Node 2 Activation:  0.0461207108272
+Node 3 Activation:  0.0571075825962
+Node 4 Activation:  0.820116521669
+
+
+_________________________________________________________________________________
+TRAINING SET 3
+Epochs to settle:  37 
+
+Ex-anti Error:  0.190510112738 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Distortion Level: 0.522931162144
+Global Error: 0.274114179961 
+
+Node 1 Activation:  0.568043379268
+Node 2 Activation:  0.343061746154
+Node 3 Activation:  0.0182255560535
+Node 4 Activation:  0.0258208347137
+
+
+Distortion Level: 0.703882273076
+Global Error: 0.402933551183 
+
+Node 1 Activation:  0.601485039391
+Node 2 Activation:  0.529467745598
+Node 3 Activation:  0.0109651470922
+Node 4 Activation:  0.0245785813182
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Distortion Level: 0.300966881146
+Global Error: 0.0392968856728 
+
+Node 1 Activation:  0.196773339857
+Node 2 Activation:  0.892213380782
+Node 3 Activation:  0.0286204880491
+Node 4 Activation:  0.00365164654626
+
+
+Distortion Level: 0.0878348603145
+Global Error: 0.0381463022057 
+
+Node 1 Activation:  0.189890054148
+Node 2 Activation:  0.884164645822
+Node 3 Activation:  0.0115649260881
+Node 4 Activation:  0.0253015210213
+
+
+_________________________________________________________________________________

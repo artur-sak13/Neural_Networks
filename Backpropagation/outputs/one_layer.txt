@@ -1,0 +1,215 @@
+TRAINING SET 1
+Epochs to settle:  52 
+
+Ex-anti Error:  0.196898199162 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Global Error: 0.0328556134809 
+
+Node 1 Activation:  0.845956439692
+Node 2 Activation:  0.10504977375
+Node 3 Activation:  0.0923099820797
+Node 4 Activation:  0.0692518009566
+
+
+Global Error: 0.0319646444488 
+
+Node 1 Activation:  0.858075636409
+Node 2 Activation:  0.104406749179
+Node 3 Activation:  0.110358489691
+Node 4 Activation:  0.0625433666461
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Global Error: 0.0134675849047 
+
+Node 1 Activation:  0.0768022173881
+Node 2 Activation:  0.896233438994
+Node 3 Activation:  0.0726517521912
+Node 4 Activation:  0.041261449924
+
+
+Global Error: 0.0363291232823 
+
+Node 1 Activation:  0.113311189293
+Node 2 Activation:  0.847218961583
+Node 3 Activation:  0.105059327862
+Node 4 Activation:  0.0725000172911
+
+
+Category 3 
+
+[0.02, 0.02, 0.98, 0.02]
+
+Global Error: 0.0299602976676 
+
+Node 1 Activation:  0.113014002621
+Node 2 Activation:  0.0921949648044
+Node 3 Activation:  0.860303184035
+Node 4 Activation:  0.0620624807712
+
+
+Global Error: 0.0290155068037 
+
+Node 1 Activation:  0.108023008306
+Node 2 Activation:  0.0740969530745
+Node 3 Activation:  0.860523302709
+Node 4 Activation:  0.0837675096338
+
+
+Category 4 
+
+[0.02, 0.02, 0.02, 0.98]
+
+Global Error: 0.00640163070579 
+
+Node 1 Activation:  0.0434353421837
+Node 2 Activation:  0.0565606837132
+Node 3 Activation:  0.0524278847376
+Node 4 Activation:  0.921142849709
+
+
+Global Error: 0.0117823821657 
+
+Node 1 Activation:  0.0683705755489
+Node 2 Activation:  0.0516854094072
+Node 3 Activation:  0.0694328795444
+Node 4 Activation:  0.902572002238
+
+
+_________________________________________________________________________________
+TRAINING SET 2
+Epochs to settle:  16 
+
+Ex-anti Error:  0.194314094645 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Global Error: 0.0365471170793 
+
+Node 1 Activation:  0.865635755491
+Node 2 Activation:  0.169449781484
+Node 3 Activation:  0.00801868037539
+Node 4 Activation:  0.0514507146467
+
+
+Global Error: 0.018511817954 
+
+Node 1 Activation:  0.91396932743
+Node 2 Activation:  0.12996016463
+Node 3 Activation:  0.0153645586986
+Node 4 Activation:  0.0651557649971
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Global Error: 0.0406155824352 
+
+Node 1 Activation:  0.139761822757
+Node 2 Activation:  0.824951362217
+Node 3 Activation:  0.00582106807409
+Node 4 Activation:  0.065072897134
+
+
+Global Error: 0.030815173186 
+
+Node 1 Activation:  0.0269312936199
+Node 2 Activation:  0.824418851666
+Node 3 Activation:  0.0249645632855
+Node 4 Activation:  0.100851652731
+
+
+Category 3 
+
+[0.02, 0.02, 0.98, 0.02]
+
+Global Error: 0.0134808456568 
+
+Node 1 Activation:  0.015416072168
+Node 2 Activation:  0.0843705655278
+Node 3 Activation:  0.88654391437
+Node 4 Activation:  0.0441293102867
+
+
+Global Error: 0.00496747632957 
+
+Node 1 Activation:  0.025169632415
+Node 2 Activation:  0.0631995934155
+Node 3 Activation:  0.937826565944
+Node 4 Activation:  0.0559992752558
+
+
+Category 4 
+
+[0.02, 0.02, 0.02, 0.98]
+
+Global Error: 0.0140659704843 
+
+Node 1 Activation:  0.0828191479888
+Node 2 Activation:  0.0362484070814
+Node 3 Activation:  0.0326700510943
+Node 4 Activation:  0.881535873523
+
+
+Global Error: 0.0153409360861 
+
+Node 1 Activation:  0.0151492133014
+Node 2 Activation:  0.0361199571424
+Node 3 Activation:  0.128681874574
+Node 4 Activation:  0.923028050101
+
+
+_________________________________________________________________________________
+TRAINING SET 3
+Epochs to settle:  107 
+
+Ex-anti Error:  0.196630207318 
+
+Category 1 
+
+[0.98, 0.02, 0.02, 0.02]
+
+Global Error: 0.0507162746979 
+
+Node 1 Activation:  0.781483998891
+Node 2 Activation:  0.12447023596
+Node 3 Activation:  0.032059044786
+Node 4 Activation:  0.035755038529
+
+
+Global Error: 0.0497655078116 
+
+Node 1 Activation:  0.783050314148
+Node 2 Activation:  0.124470387776
+Node 3 Activation:  0.0221608764244
+Node 4 Activation:  0.027589317839
+
+
+Category 2 
+
+[0.02, 0.98, 0.02, 0.02]
+
+Global Error: 0.0458615893111 
+
+Node 1 Activation:  0.20899275346
+Node 2 Activation:  0.880309389292
+Node 3 Activation:  0.0296129397605
+Node 4 Activation:  0.00938388128978
+
+
+Global Error: 0.0455314749522 
+
+Node 1 Activation:  0.207678317448
+Node 2 Activation:  0.880309261688
+Node 3 Activation:  0.00279924762629
+Node 4 Activation:  0.0286148084459

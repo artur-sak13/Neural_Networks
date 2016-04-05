@@ -1,0 +1,62 @@
+Epochs to settle:  6844 
+
+Ex-anti Error:  0.00999969293693 
+
+Epochs to settle:  91 
+
+Ex-anti Error:  0.00989413403685 
+
+PATTERN 1
+[0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 0.284243273487 
+
+Node 1 Activation:  0.0749538834793
+Node 2 Activation:  5.50440964326e-06
+Node 3 Activation:  0.451296181068
+Node 4 Activation:  0.999613055338
+Node 5 Activation:  0.0321921363241
+Node 6 Activation:  0.00143916140936
+Node 7 Activation:  1.57163347987e-05
+Node 8 Activation:  0.0243173741391
+
+
+PATTERN 2
+[1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 2.01381402076 
+
+Node 1 Activation:  0.287950112282
+Node 2 Activation:  0.159201368199
+Node 3 Activation:  0.952724189132
+Node 4 Activation:  0.0529972929639
+Node 5 Activation:  2.06209106893e-05
+Node 6 Activation:  0.00139990639753
+Node 7 Activation:  0.00140440186374
+Node 8 Activation:  0.0212867223066
+
+
+PATTERN 3
+[1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+Global Error: 2.62525987478 
+
+Node 1 Activation:  0.000901665656663
+Node 2 Activation:  0.0212591244784
+Node 3 Activation:  0.992466652553
+Node 4 Activation:  0.0543748427523
+Node 5 Activation:  0.00155748350866
+Node 6 Activation:  0.000159118874323
+Node 7 Activation:  0.138860655609
+Node 8 Activation:  0.02537387257
+
+
+TESTING LAST PATTERN
+[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+Global Error: 1.34591629518 
+
+Node 1 Activation:  0.125895735067
+Node 2 Activation:  0.00111703165637
+Node 3 Activation:  0.123378892485
+Node 4 Activation:  0.650294597596
+Node 5 Activation:  0.000978234567816
+Node 6 Activation:  0.0835300319082
+Node 7 Activation:  0.000164999079942
+Node 8 Activation:  0.0200020692565

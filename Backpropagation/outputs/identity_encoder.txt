@@ -1,0 +1,101 @@
+
+Epochs to settle:  4924 
+
+Ex-anti Error:  0.00999959668534 
+
+PATTERN 1
+[1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 0.00105355170075 
+
+Node 1 Activation:  0.967521558548
+Node 2 Activation:  0.0253761901903
+Node 3 Activation:  0.0214166561906
+Node 4 Activation:  6.7933700225e-06
+Node 5 Activation:  0.0244876989541
+Node 6 Activation:  0.0212443898337
+Node 7 Activation:  2.36811676674e-05
+Node 8 Activation:  0.0268161785881
+
+
+PATTERN 2
+[0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 0.0015760853838 
+
+Node 1 Activation:  0.0248515227595
+Node 2 Activation:  0.969198595333
+Node 3 Activation:  2.85448952647e-06
+Node 4 Activation:  0.000319967988409
+Node 5 Activation:  4.41272485524e-05
+Node 6 Activation:  0.0292052251857
+Node 7 Activation:  0.0323473119128
+Node 8 Activation:  0.023641310194
+
+
+PATTERN 3
+[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 0.0011520530257 
+
+Node 1 Activation:  0.0213789657467
+Node 2 Activation:  9.72564585615e-07
+Node 3 Activation:  0.968707029682
+Node 4 Activation:  0.0314108057523
+Node 5 Activation:  0.0244841605614
+Node 6 Activation:  0.0276508219715
+Node 7 Activation:  9.14740643787e-06
+Node 8 Activation:  0.0162349297372
+
+
+PATTERN 4
+[0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+Global Error: 0.00172599942024 
+
+Node 1 Activation:  1.12952694805e-06
+Node 2 Activation:  5.83550480204e-05
+Node 3 Activation:  0.0199396288279
+Node 4 Activation:  0.958796143002
+Node 5 Activation:  6.57211409943e-05
+Node 6 Activation:  0.0186415665889
+Node 7 Activation:  0.0244431088061
+Node 8 Activation:  0.0122665551293
+
+
+PATTERN 5
+[0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+Global Error: 0.00155715673514 
+
+Node 1 Activation:  0.0251065853518
+Node 2 Activation:  4.75148101408e-05
+Node 3 Activation:  0.0280638574683
+Node 4 Activation:  0.000281998287169
+Node 5 Activation:  0.969277870583
+Node 6 Activation:  2.30686262195e-06
+Node 7 Activation:  0.0324708590289
+Node 8 Activation:  0.0229594513227
+
+
+PATTERN 6
+[0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+Global Error: 0.00114709004898 
+
+Node 1 Activation:  0.0218940015008
+Node 2 Activation:  0.0237416782533
+Node 3 Activation:  0.0267930645545
+Node 4 Activation:  0.0313204088893
+Node 5 Activation:  1.14297920317e-06
+Node 6 Activation:  0.967965806348
+Node 7 Activation:  1.01993454727e-05
+Node 8 Activation:  0.0167080342523
+
+
+PATTERN 7
+[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+Global Error: 0.00178652179921 
+
+Node 1 Activation:  1.23762805228e-05
+Node 2 Activation:  0.0255790369285
+Node 3 Activation:  8.77230047647e-06
+Node 4 Activation:  0.0343346391459
+Node 5 Activation:  0.0253784067783
+Node 6 Activation:  7.46296598191e-06
+Node 7 Activation:  0.962078991823
+Node 8 Activation:  0.019015800208
