@@ -92,22 +92,6 @@ def calculate_SSR(actuals, predicted):
         ssr += (p1 - p2)**2
     return ssr
 
-def calculate_R(actuals, predicted):
-    r = 0.0
-    one = 0.0
-    two = 0.0
-    three = 0.0
-    four = 0.0
-    five = 0.0
-    for p1, p2 in zip(actuals, predicted):
-        one += p1 * p2
-        two += p1
-        three += p2
-        four += (p1)**2
-        five += (p2)**2
-    r = len(actuals) * (one - (two * three))/ math.sqrt((len(actuals)* (four - two**2)) * (len(actuals)*(five - three**2)))
-    return r
-
 def f_sst(data, mean):
     sst = 0.0
     for prd in data:
@@ -139,7 +123,6 @@ def analyze():
     ssr = calculate_SSR(price, data)
     sst = f_sst(data, calculate_mean(data))
     r_square = 1.0 - (ssr/sst)
-    # r = calculate_R(price, data)
 
 
 
@@ -159,20 +142,14 @@ def analyze():
 
     pdata = list(enumerate(data, start=4))
     prices = list(enumerate(getHistoricalData()))
-    # pprint(prices)
-    # plt.plot(*zip(*prices), label='Actual')
-    # plt.plot(*zip(*pdata), label='Predicted')
-    # plt.title('Actual and Forecasted ^VIX TS')
-    # plt.xlabel('Time')
-    # plt.ylabel('Price')
-    # plt.legend()
-    # plt.show()
-    # pprint(data)
 
-    # actual = getActualPrice(test)
+    plt.plot(*zip(*prices), label='Actual')
+    plt.plot(*zip(*pdata), label='Predicted')
+    plt.title('Actual and Forecasted ^VIX TS')
+    plt.xlabel('Time')
+    plt.ylabel('Price')
+    plt.legend()
+    plt.show()
 
-    # hist = getHistoricalData()
-    # hist.reverse()
-    # for
 
 analyze()
